@@ -1,0 +1,13 @@
+<component name="ArtifactManager">
+  <artifact name="ru-saperion:jar">
+    <output-path>$PROJECT_DIR$/dist</output-path>
+    <root id="root">
+      <element id="archive" name="ru-saperion.jar">
+        <element id="module-output" name="ru-saperion" />
+      </element>
+      <element id="directory" name="lib">
+        <element id="library" level="project" name="lib" />
+      </element>
+    </root>
+  </artifact>
+</component>

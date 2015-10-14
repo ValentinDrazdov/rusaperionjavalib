@@ -1,0 +1,9 @@
+Manifest-Version: 1.0
+Class-Path: authentication-otp-7.5.4.jar log4j-1.2.16.jar applsrv-inte
+ rface-7.5.4.jar sacache-2.2.1.jar scr-common-7.5.4.jar webclient-7.1.
+ 5.jar slf4j-log4j12-1.6.4.jar render-engines-core-2.2.0.jar scr-conne
+ ctor-7.5.4.jar zul-5.0.8.jar zk-5.0.8.jar authentication-keys-7.5.4.j
+ ar slf4j-api-1.6.4.jar scr-classicconnector-7.5.4.jar authentication-
+ core-7.5.4.jar saperion-common-lang-1.4.0.jar zcommon-5.0.8.jar
+Main-Class: ru.saperion.VerInfo
+
