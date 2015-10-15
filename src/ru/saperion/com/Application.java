@@ -65,7 +65,7 @@ public class Application {
         }
         catch(Exception e)
         {
-            throw new Exception(String.format("Произошла ошибка во время создания объекта Application: %s", e.getMessage()));
+            throw new Exception(String.format("Произошла ошибка во время создания объекта Application:%n%s", e.getMessage()));
         }
 
     }
@@ -74,7 +74,7 @@ public class Application {
     {
         this.connector = connector;
     }
-    
+
     public void Login(String login, String password, int licenseType) throws Exception
     {
         try
@@ -101,7 +101,6 @@ public class Application {
         {
             throw new Exception (String.format("Произошла ошибка во время разлогина:%n%s", e.getMessage()));
         }
-                
     }
     
     public Cursor SelectHQL(String definition, String query) throws Exception
@@ -134,8 +133,6 @@ public class Application {
         {
             throw new Exception(String.format("Произошла ошибка во время создания запроса:%n%s", e.getMessage()));
         }
-
-        
     }
     
     public Cursor SelectQuery (SaQueryInfo query) throws Exception

@@ -15,49 +15,49 @@ import ru.saperion.tools.DateWorker;
  * @author VDrazdov
  */
 public class Mask {
+
     private static final Logger LOG = Logger.getLogger(ru.saperion.webclient.forms.Mask.class);
 
     private IntelligentFormView form;
-    
+
     public Mask(IntelligentFormView form)
     {
         this.form = form;
     }
-    
+
     public String Field(String sFieldName)
     {
         return Field(sFieldName, Field.Limit.ANY);
     }
-    
+
     public String Field(String sFieldName, Field.Limit limit)
     {
         return FieldFromForm(form, sFieldName, limit).getValue();
     }
-    
+
     public SaQueryInfo FieldToQuery(SaQueryInfo query, String sFieldName) throws Exception
     {
         return FieldToQuery(query, sFieldName, Field.Limit.ANY);
     }
-    
+
     public SaQueryInfo FieldToQuery(SaQueryInfo query, String sFieldName, Field.Limit limit) throws Exception
     {
         return AddParamFromForm(query, form, sFieldName, limit);
     }
-    
+
     public void SetField(String sFieldName, String sFieldValue)
     {
         SetField(sFieldName, sFieldValue, Field.Limit.ANY);
     }
-    
+
     public void SetField(String sFieldName, String sFieldValue, Field.Limit limit)
     {
         SetFieldToForm(form, sFieldName, sFieldValue, limit);
     }
-    
-    
+
+
     public static SaQueryInfo AddParamFromForm(SaQueryInfo query, IntelligentFormView formView, String fieldName, Field.Limit fieldLimit) throws Exception
     {
-        
         try
         {
             if (query == null) query = new SaQueryInfo("");
@@ -65,7 +65,7 @@ public class Mask {
             if (field.getValue().equals("")) return query;
             String sQuery = String.format("and %s %s :%s%s", fieldName.toUpperCase(), fieldLimit.getCompare(), fieldName, fieldLimit.getLimitName());
             String sHQL  = query.getQueryString();
-            
+
             sHQL = String.format("%s %s", sHQL, sQuery);
 
             switch (field.getType())
@@ -80,7 +80,7 @@ public class Mask {
             }
             query.setQueryString(sHQL);
 
-            return query;           
+            return query;
         }
         catch (Exception e)
         {
@@ -89,40 +89,36 @@ public class Mask {
         }
 
     }
-    
+
     public static Field FieldFromForm (IntelligentFormView formView, String fieldName, Field.Limit fieldLimit)
     {
-            
-	String fieldValue = "";
-	try 
-	{
-            List<IntelligentField> fields = null;
+        String fieldValue = "";
+        try
+        {
+            List<IntelligentField> fields;
             TextField textField = null;
-		
+
             LOG.trace("Выполняется получение значения с поля");
             fields = formView.getFields();
-		
+
             LOG.trace(String.format("Выполняется поиск поля '%s'", fieldName));
             for (IntelligentField field : fields)
             {
-                
                 if (field.getFieldName().equalsIgnoreCase(fieldName) && (fieldLimit == Field.Limit.ANY || field.getLimit().equals(fieldLimit.getLimitName())) )
-		{
+                {
                     LOG.trace(String.format("Поле '%s' найдено", fieldName));
                     return Field.ParseField(field);
-		}
+                }
             }
-	}
-	catch (Exception e)
+        }
+        catch (Exception e)
         {
             LOG.error(String.format("Возникла непредвиденная ошибка во время получения данных с поля '%s':%n%s", fieldName, e.getMessage()));
             LOG.error(String.format("Трассировка ошибки: %s", e.getStackTrace().toString()));
         }
-        
-	return new Field(Field.Type.TEXT, fieldName, fieldValue);
-		
+        return new Field(Field.Type.TEXT, fieldName, fieldValue);
     }
-	
+
     public static void SetFieldToForm (IntelligentFormView formView, String fieldName, String value, Field.Limit limit)
     {
         try

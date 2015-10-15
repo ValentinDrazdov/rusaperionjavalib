@@ -16,37 +16,35 @@ import java.util.*;
  */
 public class Document {
     private String sXHDOC;
-    private Map<String, String> props;    
+    private Map<String, String> props;
     private Application app;
     private SaDocumentInfo documentInfo;
     private SaDocInfo docInfo;
-    private File[] files; 
-    
+    private File[] files;
+
     public Document(Application app)
     {
         this();
         this.app = app;
     }
-    
+
     public Document(Application app, SaDocumentInfo docInfo)
     {
         this(docInfo);
         this.app = app;
     }
-    
+
     public Document()
     {
-        
-        props = new HashMap<String, String>();        
+        props = new HashMap<String, String>();
     }
-    
+
     public Document(SaDocumentInfo documentInfo)
     {
-        
         SaPropertyValue prop;
         this.documentInfo = documentInfo;
         props = new HashMap<String, String>();
-        
+
         try
         {
             prop = documentInfo.getValue("$HDOC");
@@ -56,8 +54,8 @@ public class Document {
         {
             sXHDOC = "";
         }
-        
-        
+
+
         for(SaPropertyValue inprop : documentInfo.getValues())
         {
             try
@@ -70,7 +68,7 @@ public class Document {
                         props.put(inprop.getName(), getStringValue);
                         break;
                     case SaConstants.FT_INTEGER:
-                        int getIntValue = inprop.getValues()[0].getIntValue();                    
+                        int getIntValue = inprop.getValues()[0].getIntValue();
                         props.put(inprop.getName(), String.format("%d", getIntValue));
                         break;
                     case SaConstants.FT_DOUBLE:
@@ -85,23 +83,23 @@ public class Document {
             }
             catch (Exception e)
             {
-                
+
             }
-            
+
         }
-        
+
     }
-    
+
     public Boolean Load() throws Exception
     {
         try
         {
             docInfo = app.LoadDocInfo(sXHDOC);
-               
+
             if (docInfo == null) return false;
             if (docInfo.getElementCount() == 0) return false;
             files = new File[docInfo.getElementCount()];
-            
+
             for (int i = 0; i < files.length; i++)
             {
                 files[i] = new File(this, i + 1);
@@ -112,16 +110,15 @@ public class Document {
         {
             throw new Exception(String.format("Не удалось загрузить документ с HexUID = '%s', ошибка:%n%s", sXHDOC, e.getMessage()));
         }
-        
+
     }
-    
+
     public Boolean Load(String sXHDOC) throws Exception
     {
         this.sXHDOC = sXHDOC;
         return Load();
     }
-    
-    
+
     public String HexUID()
     {
         return sXHDOC;
@@ -138,17 +135,17 @@ public class Document {
     {
         return app;
     }
-    
+
     public String getProperty(String name)
     {
         if (props.containsKey(name)) return props.get(name);
-        
+
         return "";
     }
-    
+
     public File[] getFiles()
     {
         return files;
     }
-    
+
 }
