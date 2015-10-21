@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="ru-saperion">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/../dist/ru-saperion.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>
