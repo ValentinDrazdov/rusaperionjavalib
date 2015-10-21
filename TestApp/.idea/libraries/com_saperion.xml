@@ -1,0 +1,25 @@
+<component name="libraryTable">
+  <library name="com-saperion">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/../lib/applsrv-interface-7.5.4.jar!/" />
+      <root url="jar://$PROJECT_DIR$/../lib/authentication-core-7.5.4.jar!/" />
+      <root url="jar://$PROJECT_DIR$/../lib/authentication-keys-7.5.4.jar!/" />
+      <root url="jar://$PROJECT_DIR$/../lib/authentication-otp-7.5.4.jar!/" />
+      <root url="jar://$PROJECT_DIR$/../lib/log4j-1.2.16.jar!/" />
+      <root url="jar://$PROJECT_DIR$/../lib/render-engines-core-2.2.0.jar!/" />
+      <root url="jar://$PROJECT_DIR$/../lib/sacache-2.2.1.jar!/" />
+      <root url="jar://$PROJECT_DIR$/../lib/saperion-common-lang-1.4.0.jar!/" />
+      <root url="jar://$PROJECT_DIR$/../lib/scr-classicconnector-7.5.4.jar!/" />
+      <root url="jar://$PROJECT_DIR$/../lib/scr-common-7.5.4.jar!/" />
+      <root url="jar://$PROJECT_DIR$/../lib/scr-connector-7.5.4.jar!/" />
+      <root url="jar://$PROJECT_DIR$/../lib/slf4j-api-1.6.4.jar!/" />
+      <root url="jar://$PROJECT_DIR$/../lib/slf4j-log4j12-1.6.4.jar!/" />
+      <root url="jar://$PROJECT_DIR$/../lib/webclient-7.1.5.jar!/" />
+      <root url="jar://$PROJECT_DIR$/../lib/zcommon-5.0.8.jar!/" />
+      <root url="jar://$PROJECT_DIR$/../lib/zk-5.0.8.jar!/" />
+      <root url="jar://$PROJECT_DIR$/../lib/zul-5.0.8.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>
