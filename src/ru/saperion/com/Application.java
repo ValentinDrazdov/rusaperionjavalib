@@ -148,9 +148,9 @@ public class Application {
         }
     }
     
-    public InputStream LoadDocumentStream(String xhdoc, boolean bln, int iElement) throws Exception
+    public InputStream LoadDocumentStream(String xhdoc, boolean currentRevision, int iElement) throws Exception
     {
-        InputStream readStream = connector.readDocument(xhdoc, bln, iElement);
+        InputStream readStream = connector.readDocument(xhdoc, currentRevision, iElement);
         return readStream;
     }
     
