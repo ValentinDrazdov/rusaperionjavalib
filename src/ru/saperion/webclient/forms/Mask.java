@@ -11,51 +11,104 @@ import java.util.*;
 import org.apache.log4j.Logger;
 import ru.saperion.tools.DateWorker;
 /**
- *
- * @author VDrazdov
+ * Работа с формой веб-клиента
+ * @author Драздов Валентин
  */
 public class Mask {
 
     private static final Logger LOG = Logger.getLogger(ru.saperion.webclient.forms.Mask.class);
 
+    /**
+     * Объект формы, полученный из WEB-клиента
+     */
     private IntelligentFormView form;
 
+    /**
+     * Данный конструктор инициализирует объект для дальнейшей работой с формой по привычному формату, как через COM
+     * @param form {@link #form Объект формы, полученный из WEB-клиента}
+     */
     public Mask(IntelligentFormView form)
     {
         this.form = form;
     }
 
+    /**
+     * Данная функция возвращает значение указанного в параметре поля. 
+     * @param sFieldName {@link Field#name Наименование поля}
+     * @return значение поля<br>В случае, если поле не найдено - будет возвращена пустая строка
+     */
     public String Field(String sFieldName)
     {
         return Field(sFieldName, Field.Limit.ANY);
     }
 
+    /**
+     * Данная функция возвращает значение указанного в параметре поля. 
+     * @param sFieldName {@link Field#name Наименование поля}
+     * @param limit {@link Field#type Ограничение\граница поля  }, используемый при построении запросов.
+     * @return значение поля<br>В случае, если поле не найдено - будет возвращена пустая строка
+     */
     public String Field(String sFieldName, Field.Limit limit)
     {
         return FieldFromForm(form, sFieldName, limit).getValue();
     }
 
+    /**
+     * Данная функция устанавливает значение в поле
+     * @param sFieldName {@link Field#name Наименование поля}
+     * @param sFieldValue {@link Field#value Значение поля}
+     */
     public void SetField(String sFieldName, String sFieldValue)
     {
         SetField(sFieldName, sFieldValue, Field.Limit.ANY);
     }
+    
+    /**
+     * Данная функция устанавливает значение в поле
+     * @param sFieldName {@link Field#name Наименование поля}
+     * @param sFieldValue {@link Field#value Значение поля}
+     * @param limit {@link Field#type Ограничение\граница поля}, используемый при построении запросов.
+     */    
     public void SetField(String sFieldName, String sFieldValue, Field.Limit limit)
     {
         SetFieldToForm(form, sFieldName, sFieldValue, limit);
     }
 
+    /**
+     * Данная функция предназначена для формирования корректного параметрического фильтра в запрос из Saperion Classic Connector
+     * @param query запрос, который необходимо дополнить параметрическим фильтром
+     * @param sFieldName {@link Field#name Наименование поля}
+     * @return запрос, дополненный параметрическим фильтром
+     * @throws Exception в случае возникновении ошибки при составлении запроса
+     */
     public SaQueryInfo FieldToQuery(SaQueryInfo query, String sFieldName) throws Exception
     {
         return FieldToQuery(query, sFieldName, Field.Limit.ANY);
     }
 
+    /**
+     * Данная функция предназначена для формирования корректного параметрического фильтра в запрос из Saperion Classic Connector
+     * @param query запрос, который необходимо дополнить параметрическим фильтром
+     * @param sFieldName {@link Field#name Наименование поля}
+     * @param limit {@link Field#type Ограничение\граница поля}, используемый при построении запросов.
+     * @return запрос, дополненный параметрическим фильтром
+     * @throws Exception в случае возникновении ошибки при составлении запроса
+     */
     public SaQueryInfo FieldToQuery(SaQueryInfo query, String sFieldName, Field.Limit limit) throws Exception
     {
         return AddParamFromForm(query, form, sFieldName, limit);
     }
 
 
-
+    /**
+     * Данная функция аналогична функции FieldToQuery, отличается тем, что не требует создания объекта формы, но нуждается в передаче полного набора параметров
+     * @param query запрос, который необходимо дополнить параметрическим фильтром
+     * @param formView объект формы из Saperion WEB Client
+     * @param fieldName {@link Field#name Наименование поля}
+     * @param fieldLimit {@link Field#type Ограничение\граница поля}, используемый при построении запросов.
+     * @return запрос, дополненный параметрическим фильтром
+     * @throws Exception в случае возникновении ошибки при составлении запроса
+     */
     public static SaQueryInfo AddParamFromForm(SaQueryInfo query, IntelligentFormView formView, String fieldName, Field.Limit fieldLimit) throws Exception
     {
         try
@@ -90,6 +143,13 @@ public class Mask {
 
     }
 
+    /**
+     * Данная функция аналогична функции Field, отличается тем, что не требует создания объекта формы, но нуждается в передаче полного набора параметров
+     * @param formView объект формы из Saperion WEB Client
+     * @param fieldName {@link Field#name Наименование поля}
+     * @param fieldLimit {@link Field#type Ограничение\граница поля}, используемый при построении запросов.
+     * @return значение поля<br>В случае, если поле не найдено - будет возвращена пустая строка
+     */
     public static Field FieldFromForm (IntelligentFormView formView, String fieldName, Field.Limit fieldLimit)
     {
         String fieldValue = "";
@@ -119,6 +179,13 @@ public class Mask {
         return new Field(Field.Type.TEXT, fieldName, fieldValue);
     }
 
+    /**
+     * Данная функция аналогична функции SetField, отличается тем, что не требует создания объекта формы, но нуждается в передаче полного набора параметров
+     * @param formView объект формы из Saperion WEB Client
+     * @param fieldName {@link Field#name Наименование поля}
+     * @param value значение, которое нужно установить в поле
+     * @param limit {@link Field#type Ограничение\граница поля}, используемый при построении запросов.
+     */
     public static void SetFieldToForm (IntelligentFormView formView, String fieldName, String value, Field.Limit limit)
     {
         try
