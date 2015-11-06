@@ -14,6 +14,11 @@ import org.apache.log4j.Logger;
 public class SaClassicConnectorCreator {
     private static final Logger LOG = Logger.getLogger(ru.saperion.SaClassicConnectorCreator.class);
     
+    /**
+     * Функция для создания коннектора к Сапериону через WEB
+     * @return Объект-коннектор к Сапериону
+     * @throws Exception в случае неудачного подключения
+     */
     public static SaClassicConnector GetWebClientConnector() throws Exception
     {
         try
@@ -41,6 +46,14 @@ public class SaClassicConnectorCreator {
         
     }
     
+    /**
+     * Функция для создания коннектора к Сапериону через файл настроек
+     * @param sSetiingsFile путь к файлу настроек
+     * @return Объект-коннектор к Сапериону
+     * @throws Exception <ul><li>в случае, если файла настроек не существует
+     * <li>в случае, если нет прав доступа на файл настроек
+     * <li>в случае, если не удалось подключится к серверу Сапериона</ul>
+     */
     public static SaClassicConnector GetConnectorInstance(String sSetiingsFile) throws Exception
     {
         try

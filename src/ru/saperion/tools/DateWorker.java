@@ -7,11 +7,14 @@ package ru.saperion.tools;
 
 import java.util.*;
 /**
- *
- * @author VDrazdov
+ * Работа с датами
+ * @author Драздов Валентин Сергеевич
  */
 public class DateWorker {
     
+    /**
+     * Данный тип используется при преобразовании даты в строку и обратно
+     */
     public enum DateFormat
     {
         SAPERION ("Saperion", "EEE MMM dd HH:mm:ss Z yyyy"),
@@ -21,23 +24,43 @@ public class DateWorker {
         private final String sFormat;
         private final String sName;
         
+        /**
+         * Объявление формата даты
+         * @param name Понятное название формата даты
+         * @param format Формат даты
+         */
         DateFormat(String name, String format)
         {
             sName = name;
             sFormat = format;            
         }
         
+        /**
+         * Получить форматы даты
+         * @return Формат даты
+         */
         public String getFormat()
         {
             return sFormat;
         }
         
+        /**
+         * Получить название формата даты
+         * @return Название формата даты
+         */
         public String getName()
         {
             return sName;
         }
     }
     
+    /**
+     * Данная функция предназначена для преобразования строки в формат даты JAVA. Как правило, данная функция необходима для дальнейшем использовании даты в запросе.
+     * @param sSource строка с записанной датой
+     * @param format тип формата даты, в котором она записана в строке
+     * @return Дата, полученная из строки
+     * @throws Exception 
+     */
     public static Date FromStringToDate(String sSource, DateFormat format) throws Exception
     {
         if (sSource.length() < 1)
@@ -57,6 +80,14 @@ public class DateWorker {
         }
     }
     
+    /**
+     * Данная функция предназначена для преобразования объекта даты в строку по нужному формату. Как правило, используется для отображения в графическом интерфейсе, или протоколах
+     * @param dateSource дата, которую нужно преобразовать
+     * @param format формат, в котором нужно записать дату в строке
+     * @return Строка, преобразованная из даты, согласно формату
+     * @see DateFormat
+     * @throws Exception 
+     */
     public static String FromDateToString(Date dateSource, DateFormat format) throws Exception
     {
         try
