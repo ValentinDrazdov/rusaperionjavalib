@@ -24,17 +24,30 @@ public class DateWorker {
         private final String sFormat;
         private final String sName;
         
+        /**
+         * Объявление формата даты
+         * @param name Понятное название формата даты
+         * @param format Формат даты
+         */
         DateFormat(String name, String format)
         {
             sName = name;
             sFormat = format;            
         }
         
+        /**
+         * Получить форматы даты
+         * @return Формат даты
+         */
         public String getFormat()
         {
             return sFormat;
         }
         
+        /**
+         * Получить название формата даты
+         * @return Название формата даты
+         */
         public String getName()
         {
             return sName;

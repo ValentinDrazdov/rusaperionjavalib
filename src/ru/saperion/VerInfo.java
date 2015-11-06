@@ -15,8 +15,8 @@ public class VerInfo {
 
 
     
-    public static String sNumber = "0.1";
-    public static String sAuthors = "Драздов Валентин";
+    public static String sNumber = "0.5";
+    public static String sAuthors = "Драздов Валентин, Фомченков Павел";
     public static String sMinJDKVer = "1.7";
     public static String sMinSaperionVer = "7.1.5";
         
