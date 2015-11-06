@@ -6,11 +6,8 @@
 package ru.saperion.reports;
 
 import com.saperion.connector.SaClassicConnector;
-import com.saperion.exception.*;
-import com.saperion.intf.SaDocumentInfo;
 import com.saperion.ngc.iform.*;
 import com.saperion.rmi.*;
-import java.nio.charset.Charset;
 import java.util.*;
 import org.zkoss.zul.*;
 
@@ -18,18 +15,35 @@ import org.apache.log4j.Logger;
 import ru.saperion.com.Application;
 
 /**
- *
- * @author VDrazdov
+ * Класс для формирования отчета в CSV
+ * @author Драздов Валентин
  */
 public class Csv {
     private static final Logger LOG = Logger.getLogger(ru.saperion.reports.Csv.class);
     
-    
-    public static String generate(SaClassicConnector connector, Class<? extends IReportLine> reportType, IntelligentFormView form) throws InstantiationException, Exception
+    /**
+     * Данная функция предназначена для генерации отчета в формате CSV
+     * @param connector Объект-коннектор к Сапериону
+     * @param reportType Класс, реализованный согласно интерфейсу {@link IReportLine}
+     * @param form Объект формы, полученный от Saperion WEB Client
+     * @return Готовое содержимое для файла в формате CSV в виде строки
+     * @throws Exception 
+     */
+    public static String generate(SaClassicConnector connector, Class<? extends IReportLine> reportType, IntelligentFormView form) throws Exception
     {
         return generate(new Application(connector), reportType, form);
     }
-    public static String generate(ru.saperion.com.Application oApp, Class<? extends IReportLine> reportType, IntelligentFormView form) throws InstantiationException, Exception
+    
+    /**
+     * 
+     * @param oApp {@link ru.saperion.com.Application Объект-приложение Saperion}
+     * @param reportType
+     * @param form
+     * @return Готовое содержимое для файла в формате CSV в виде строки
+     * @throws Exception <ul><li>в случае возникновения ошибок во время получения данных
+     * <li>в случае возникновения ошибок во время обработки документов</ul>
+     */
+    public static String generate(ru.saperion.com.Application oApp, Class<? extends IReportLine> reportType, IntelligentFormView form) throws Exception
     {
         LOG.info("generate запущен");
         try
