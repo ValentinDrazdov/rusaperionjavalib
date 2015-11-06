@@ -81,19 +81,5 @@ public class Csv {
             throw new Exception(String.format("Возникла ошибка при выполнении генерации CSV:%n%s", e.toString()));
         }
     }
-    
-    public static void SaveFromWeb(String sContent, String filename, String sCodePage)
-    {
-        LOG.debug ("Формируется массив байтов");
-        byte[] unloadContent = sContent.getBytes(Charset.forName(sCodePage));
-        LOG.debug (String.format("Массив байтов сформирован, размер: %d", unloadContent.length));
-        SaveFromWeb(unloadContent, filename);        
-    }
-    
-        
-    public static void SaveFromWeb(byte[] byteContent, String filename)
-    {
-         LOG.info ("Выполняется сохранение файла с отчетом в CSV-формате");
-         Filedownload.save(byteContent, "application/csv", filename);        
-    }
+
 }

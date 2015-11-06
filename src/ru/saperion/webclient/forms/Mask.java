@@ -35,6 +35,15 @@ public class Mask {
         return FieldFromForm(form, sFieldName, limit).getValue();
     }
 
+    public void SetField(String sFieldName, String sFieldValue)
+    {
+        SetField(sFieldName, sFieldValue, Field.Limit.ANY);
+    }
+    public void SetField(String sFieldName, String sFieldValue, Field.Limit limit)
+    {
+        SetFieldToForm(form, sFieldName, sFieldValue, limit);
+    }
+
     public SaQueryInfo FieldToQuery(SaQueryInfo query, String sFieldName) throws Exception
     {
         return FieldToQuery(query, sFieldName, Field.Limit.ANY);
@@ -45,15 +54,6 @@ public class Mask {
         return AddParamFromForm(query, form, sFieldName, limit);
     }
 
-    public void SetField(String sFieldName, String sFieldValue)
-    {
-        SetField(sFieldName, sFieldValue, Field.Limit.ANY);
-    }
-
-    public void SetField(String sFieldName, String sFieldValue, Field.Limit limit)
-    {
-        SetFieldToForm(form, sFieldName, sFieldValue, limit);
-    }
 
 
     public static SaQueryInfo AddParamFromForm(SaQueryInfo query, IntelligentFormView formView, String fieldName, Field.Limit fieldLimit) throws Exception
