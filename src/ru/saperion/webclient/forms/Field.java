@@ -14,43 +14,79 @@ import org.apache.log4j.Logger;
 import ru.saperion.tools.DateWorker;
 
 /**
- *
- * @author VDrazdov
+ * Работа с элементом формы - полем
+ * @author Драздов Валентин
  */
 public class Field {
     private static final Logger LOG = Logger.getLogger(ru.saperion.webclient.forms.Field.class);
     
+    /**
+     * Название поля
+     */
     private String name;
+    
+    /**
+     * Значение поля
+     */
     private String value;
     
+    /** 
+     * Тип поля
+     */
     private Type type;
     
-    
+    /**
+     * Данный тип используется при получении и занесении значений в поле
+     */
     public static enum Type
     {
         TEXT (1, "Text"),
         COMBO (2, "Combo"),
         DATE (3, "Date");
         
+        /**
+         * Номер типа
+         */
         private final int typeNum;
+        
+        /**
+         * Наименование типа
+         */
         private final String typeName;
+        
+        /**
+         * Определение типа поля
+         * @param type {@link #typeNum Номер типа}
+         * @param name {@link #typeName Наименование типа}
+         */
         Type(int type, String name)
         {
             typeNum = type;
             typeName = name;
         }
         
+        /**
+         * Получить {@link #typeNum номер типа}
+         * @return {@link #typeNum Номер типа}
+         */
         public int getTypeNum()
         {
             return typeNum;
         }
+        
+        /**
+         * Получить {@link #typeNum наименование типа}
+         * @return {@link #typeNum Наименование типа}
+         */
         public String getTypeName()
         {
             return typeName;
         }                
     }
     
-    
+    /**
+     * Данный тип используется при обработке поля в качестве условного параметра составляемого запроса
+     */
     public static enum Limit
     {
         ANY (0, "", "like"),
@@ -58,10 +94,27 @@ public class Field {
         UPPER (2, "upper", "<="),
         BOTH (3, "both", "=");
         
+        /**
+         * Числовое обозначение лимита
+         */
         private final int limitNum;
+        
+        /**
+         * Наименование лимита
+         */
         private final String limitName;
+        
+        /**
+         * Ключеове слово для запроса
+         */
         private final String queryCompare;
         
+        /** Определение нового типа лимита
+         * 
+         * @param type {@link #limitNum Числовое обозначение лимита)
+         * @param name {@link #limitName Наименование лимита}
+         * @param compare {@link queryCompare Ключеове слово для запроса}
+         */
         Limit(int type, String name, String compare)
         {
             limitNum = type;
@@ -69,20 +122,41 @@ public class Field {
             queryCompare = compare;
         }
         
+        /**
+         * Получить {@link #limitNum числовое обозначение лимита)
+         * @return {@link #limitNum Числовое обозначение лимита)
+         */
         public int getLimitNum()
         {
             return limitNum;
         }
+        
+        /**
+         * Получить {@link #limitName наименование лимита}
+         * @return {@link #limitName Наименование лимита}
+         */
         public String getLimitName()
         {
             return limitName;
-        }                
+        }   
+        
+        /**
+         * Получить {@link #limitName ключеове слово для запроса}
+         * @return {@link #limitName Ключеове слово для запроса}
+         */
         public String getCompare()
         {
             return queryCompare;
         }
     }
     
+    /**
+     * Данный конструктор предназначен для создания объекта типа {@link Field} и хранения в нем оперативной информации по полю.
+     * <p>Как правило, используется в функции {@link #ParseField} и не предназначен для использования извне
+     * @param type Тип поля
+     * @param name Наименование поля
+     * @param value Значение поля
+     */
     public Field(Type type, String name, String value)
     {
         this.type = type;
@@ -90,27 +164,49 @@ public class Field {
         this.value = value;
     }
     
+    /**
+     * Получить {@link #type тип поля}
+     * @return {@link #type Тип поля}
+     */
     public Type getType()
     {
         return type;
     }
     
+    /**
+     * Получить {@link #value значение поля}
+     * @return {@link #value Значение поля}
+     */
     public String getValue()
     {
         return value;
     }
     
+    /**
+     * Получить {@link #name наименование поля}
+     * @return {@link #name Наименование поля}
+     */
     public String getName()
     {
         return name;
     }
     
+    /**
+    * Получить {@link #value значение поля}
+    * @return {@link #value Значение поля}
+    */
     @Override
     public String toString()
     {
         return getValue();
     }
     
+    /**
+     * Данная функция предназначена для получения актуальной информации о поле по объекту из Saperion WEB Client. 
+     * @param field объект поля из Saperion WEB Client
+     * @return готовый экземпляр класса
+     * @throws Exception в случае технических ошибок при получении значения поля.
+     */
     public static Field ParseField(IntelligentField field) throws Exception
     {
         String fieldName="";

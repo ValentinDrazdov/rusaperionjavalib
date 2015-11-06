@@ -6,11 +6,18 @@
 package ru.saperion.tools;
 
 import java.io.*;
+
 /**
- *
- * @author VDrazdov
+ * Работа с файлами
+ * @author Драздов Валентин Сергеевич
  */
 public class FileWorker {
+    /** 
+    * Данный метод предназначен для сохранения массива байт (содержимого файлов) в файловую систему.
+    * @param sFileName адрес для сохранения файла
+    * @param content массив с содержимым файла
+    * @throws Exception
+    **/
     public static void SaveFile(String sFileName, byte[] content) throws Exception
     {
         try
@@ -27,6 +34,11 @@ public class FileWorker {
         }
     }
     
+    /**
+     * Данный метод предназначен для создания директории
+     * @param sDirName адрес директории
+     * @throws Exception 
+     */
     public static void MkDir(String sDirName) throws Exception
     {
         try
