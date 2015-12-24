@@ -174,7 +174,7 @@ public class Application {
                 String sHQL = "from " + definition;
                 if (query != null && query.length() > 0)
                 {
-                    sHQL += "where " + query;
+                    sHQL += " where " + query;
                 }
 
                 saQuery = new SaQueryInfo(sHQL);
