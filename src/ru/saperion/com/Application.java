@@ -164,7 +164,7 @@ public class Application {
             {
                 if (query.substring(0,0) == "@")
                 {
-                    query = query.substring(1, query.length());
+                    query = query.substring(1, query.length() - 2);
                     saQuery = new SaQueryInfo(query);
                 }
             }
@@ -178,6 +178,7 @@ public class Application {
                 }
 
                 saQuery = new SaQueryInfo(sHQL);
+                
             }
             return SelectQuery(saQuery);
         }
