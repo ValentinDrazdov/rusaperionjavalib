@@ -145,19 +145,19 @@ public class Document {
                 {
                     case SaConstants.FT_STRING:
                         String getStringValue = inprop.getStringValue();
-                        props.put(inprop.getName(), getStringValue);
+                        props.put(inprop.getName().toUpperCase(), getStringValue);
                         break;
                     case SaConstants.FT_INTEGER:
                         int getIntValue = inprop.getValues()[0].getIntValue();
-                        props.put(inprop.getName(), String.format("%d", getIntValue));
+                        props.put(inprop.getName().toUpperCase(), String.format("%d", getIntValue));
                         break;
                     case SaConstants.FT_DOUBLE:
                         double getDoubleValue = inprop.getValues()[0].getFloatValue();
-                        props.put(inprop.getName(), String.format(Locale.US, "%f", getDoubleValue));
+                        props.put(inprop.getName().toUpperCase(), String.format(Locale.US, "%f", getDoubleValue));
                         break;
                     case SaConstants.FT_DATE:
                         short dtar[] = inprop.getValues()[0].getDateValue();
-                        props.put(inprop.getName(), String.format("%d.%d.%d", dtar[0], dtar[1], dtar[2]));
+                        props.put(inprop.getName().toUpperCase(), String.format("%d.%d.%d", dtar[0], dtar[1], dtar[2]));
                         break;
                 }
             }
@@ -255,7 +255,7 @@ public class Document {
      */
     public String GetProperty(String name)
     {
-        if (props.containsKey(name)) return props.get(name);
+        if (props.containsKey(name.toUpperCase())) return props.get(name.toUpperCase());
 
         return "";
     }
